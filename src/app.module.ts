@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ProductsModule } from './products/products.module';
+import { CommonModule } from './common/common.module';
 
 @Module({
   imports: [
@@ -16,6 +18,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       entities: [],
       synchronize: true, // Cuando se realiza un cambio en las entidades, se sincroniza con la base de datos, no se utiliza en producción
     }),
+    ProductsModule,
+    CommonModule,
   ],
   controllers: [],
   providers: [],
