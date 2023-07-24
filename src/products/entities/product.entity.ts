@@ -36,12 +36,13 @@ export class Product {
     this.slug = this.slug.toLowerCase().replaceAll(" ", "_").replaceAll("'", "");
   }
 
-  // @BeforeUpdate() // Este decorador nos permite ejecutar una función antes de actualizar un registro en la base de datos
-  // checkSlugUpdate() {
-  //   if (!this.slug) {
-  //     this.slug = this.title
-  //   }
+  @BeforeUpdate() // Este decorador nos permite ejecutar una función antes de actualizar un registro en la base de datos
+  checkSlugUpdate() {
+    
+    if (!this.slug) {
+      this.slug = this.title
+    }
 
-  //   this.slug = this.slug.toLowerCase().replaceAll(" ", "_").replaceAll("'", "");
-  // }
+    this.slug = this.slug.toLowerCase().replaceAll(" ", "_").replaceAll("'", "");
+  }
 }
