@@ -30,4 +30,9 @@ export class CreateProductDto {
 
   @IsIn(["men", "women", "kids", "unisex"]) // enum de string que solo acepta estos valores
   gender: string;
+
+  @IsString({ each: true })
+  @IsArray()
+  @IsOptional()
+  tags: string[]
 }

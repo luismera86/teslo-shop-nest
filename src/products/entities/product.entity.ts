@@ -27,6 +27,9 @@ export class Product {
   @Column("text")
   gender: string;
 
+  @Column("text",{array: true, default: []})
+  tags: string[]
+
   @BeforeInsert() // Este decorador nos permite ejecutar una función antes de insertar un registro en la base de datos
   checkSlug() {
     if (!this.slug) {
