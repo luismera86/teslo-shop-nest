@@ -1,4 +1,5 @@
-import { BeforeInsert, BeforeUpdate, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, BeforeUpdate, Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { ProductImage } from "./proctuct-image.entity";
 
 @Entity()
 export class Product {
@@ -27,8 +28,15 @@ export class Product {
   @Column("text")
   gender: string;
 
-  @Column("text",{array: true, default: []})
+  @Column("text", { array: true, default: [] })
   tags: string[]
+
+  @OneToMany(
+    () => ProductImage,
+    productImage => productImage.product,
+    { cascade: true, eager: true }
+  )
+  images?: ProductImage[];
 
   @BeforeInsert() // Este decorador nos permite ejecutar una función antes de insertar un registro en la base de datos
   checkSlug() {
@@ -41,7 +49,7 @@ export class Product {
 
   @BeforeUpdate() // Este decorador nos permite ejecutar una función antes de actualizar un registro en la base de datos
   checkSlugUpdate() {
-    
+
     if (!this.slug) {
       this.slug = this.title
     }
